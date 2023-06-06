@@ -31,6 +31,7 @@ $result = Invoke-RestMethod -Method POST -Headers $Headers -Uri $issue -Body $js
 # Make a branch
 $timestamp = get-date -format "yyyy-MMM-dd-HH:mm:ss"
 $branch = "github-action/sync-dotnet-extensions-" + $timestamp
+cd azure-extensions
 git checkout -b $branch
 
 # Check if there's an open PR in Azure or Dotnet orgs to resolve this difference.
