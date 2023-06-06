@@ -76,4 +76,3 @@ jobs:
         git config --global user.email "GithubActions@users.noreply.github.com"
         git commit -a -m "${{ env.CI_COMMIT_MESSAGE }}"
         git push
-        branch: github-action/sync-dotnet-extensions
