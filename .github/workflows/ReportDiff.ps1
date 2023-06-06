@@ -1,6 +1,7 @@
 # Check the code is in sync
 $changed = (select-string "nothing to commit" artifacts\status.txt).count -eq 0
 if (-not $changed) { return $changed }
+
 # Check if tracking issue is open/closed
 $Headers = @{ Authorization = 'token {0}' -f $ENV:GITHUB_TOKEN; };
 $result = Invoke-RestMethod -Uri $issue -Headers $Headers
@@ -27,12 +28,18 @@ $json = ConvertTo-Json -InputObject @{ 'body' = $body }
 $issue = $issue + '/comments'
 $result = Invoke-RestMethod -Method POST -Headers $Headers -Uri $issue -Body $json
 
+# Make a branch
+$timestamp = get-date -format "yyyy-MMM-dd-HH:mm:ss"
+$branch = "github-action/sync-dotnet-extensions-" + $timestamp
+git checkout -b $branch
+
 # Check if there's an open PR in Azure or Dotnet orgs to resolve this difference.
 $sendpr = $true
 $Headers = @{ Accept = 'application/vnd.github.v3+json'; Authorization = 'token {0}' -f $ENV:GITHUB_TOKEN; };
 
 # Test this script using changes in a fork
-$prsLink = "https://api.github.com/repos/azure/dotnet-extensions-experimental/pulls?state=open"
+# $prsLink = "https://api.github.com/repos/azure/dotnet-extensions-experimental/pulls?state=open"
+$prsLink = "https://api.github.com/repos/tratcher/dotnet-extensions-experimental/pulls?state=open"
 $result = Invoke-RestMethod -Method GET -Headers $Headers -Uri $prsLink
 
 foreach ($pr in $result) {
