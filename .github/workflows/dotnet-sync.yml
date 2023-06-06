@@ -68,7 +68,7 @@ jobs:
       shell: cmd
       working-directory: .\azure-extensions\
       env:
-        CI_COMMIT_MESSAGE: Sync shared code from dotnet/extensions, Fixes #1.
+        CI_COMMIT_MESSAGE: Sync shared code from dotnet/extensions
         CI_COMMIT_AUTHOR: DotNet Sync - Github Actions
       # The prior powershell script created the branch
       run: |
