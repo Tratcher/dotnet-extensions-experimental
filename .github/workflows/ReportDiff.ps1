@@ -29,7 +29,7 @@ $issue = $issue + '/comments'
 $result = Invoke-RestMethod -Method POST -Headers $Headers -Uri $issue -Body $json
 
 # Make a branch
-$timestamp = get-date -format "yyyy-MMM-dd-HH:mm:ss"
+$timestamp = get-date -format "yyyy-MMM-dd-HH-mm-ss"
 $branch = "github-action/sync-dotnet-extensions-" + $timestamp
 cd azure-extensions
 git checkout -b $branch
