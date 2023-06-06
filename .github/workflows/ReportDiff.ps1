@@ -39,8 +39,7 @@ $sendpr = $true
 $Headers = @{ Accept = 'application/vnd.github.v3+json'; Authorization = 'token {0}' -f $ENV:GITHUB_TOKEN; };
 
 # Test this script using changes in a fork
-# $prsLink = "https://api.github.com/repos/azure/dotnet-extensions-experimental/pulls?state=open"
-$prsLink = "https://api.github.com/repos/tratcher/dotnet-extensions-experimental/pulls?state=open"
+$prsLink = "https://api.github.com/repos/azure/dotnet-extensions-experimental/pulls?state=open"
 $result = Invoke-RestMethod -Method GET -Headers $Headers -Uri $prsLink
 
 foreach ($pr in $result) {
