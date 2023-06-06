@@ -71,7 +71,7 @@ jobs:
         CI_COMMIT_MESSAGE: Sync shared code from dotnet/extensions, Fixes #1.
         CI_COMMIT_AUTHOR: DotNet Sync - Github Actions
       # The prior powershell script created the branch
-      run:
+      run: |
         git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
         git config --global user.email "GithubActions@users.noreply.github.com"
         git commit -a -m "${{ env.CI_COMMIT_MESSAGE }}"
